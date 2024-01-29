@@ -1,0 +1,13 @@
+/* user-dashboard.component.css (or user-dashboard.component.scss) */
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  main {
+    flex: 1;
+  }
+  
+  

@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-md bg-{{mode}} navbar-{{mode}}">
+  <div id="mySidenav" class="sidenav bg-{{mode}} " [style.width]="sidenavWidth" tabindex="0" >
+    <a style="cursor: pointer;" class="closebtn bg-{{mode}}" tabindex="0" (keydown)="closeNav()" (click)="closeNav()">&times;</a>
+    <a routerLink="/aboutus" >About Us</a>
+    <a routerLink="/contactus">Contact Us</a>
+  </div>
+<!-- using unicode character &#187 for sidenav arrow -->
+  <span style="font-size:30px;cursor:pointer" (keydown)="toggleNav()" tabindex="0" (click)="toggleNav()">&#187;</span>
+  <a *ngIf="login.isLockedIn()" class="navbar-brand" routerLink="/user"><img width="45" height="37" src="https://img.icons8.com/ios/50/news.png" alt="news"/></a>
+  <a *ngIf="!login.isLockedIn()" class="navbar-brand" routerLink=""><img width="45" height="37" src="https://img.icons8.com/ios/50/news.png" alt="news"/></a>
+  
+  <div class="" >
+  <div class="justify-content-center ">
+    <h1 class="navbar-title">News Buster Times</h1>
+  </div>
+  </div>
+
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav ml-auto ">
+
+      <li class="nav-item">
+        <a (click)="changeMode()" (keydown)="changeMode()" tabindex="0" class="btn my-2 my-sm-0 ml-2">
+          <img width="35" height="30" src="https://img.icons8.com/dotty/80/day-and-night.png" alt="day-and-night"/>
+        </a>
+      </li>
+
+      <li *ngIf="login.isLockedIn()" class="nav-item">
+        <span class="navbar-text ">
+          <strong>Welcome {{login.getUserName()}} !!</strong>
+        </span>
+      </li>
+
+      <li class="nav-item">
+        <a *ngIf="login.isLockedIn()" class="btn btn-outline-primary my-2 my-sm-0 ml-2"
+           [routerLink]="['/wishlist']" [queryParams]="{ email: login.getUserEmail() }">
+          Wishlist <i class="fas fa-heart"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a *ngIf="!login.isLockedIn()" routerLink="/login" class="btn btn-outline-primary my-2 my-sm-0 ml-2">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </a>
+      </li>
+      <li class="nav-item">
+        <a *ngIf="!login.isLockedIn()" routerLink="/signup" class="btn btn-outline-primary my-2 my-sm-0 ml-2">
+          <i class="fas fa-user-plus"></i> SignUp
+        </a>
+      </li>
+      <li (click)="logout()" (keydown)="logout()" role="button" tabindex="0" class="nav-item">
+        <a *ngIf="login.isLockedIn()" class="btn btn-outline-primary my-2 my-sm-0 ml-2">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+      </li>
+      
+      
+    </ul>
+  </div>
+</nav>
+

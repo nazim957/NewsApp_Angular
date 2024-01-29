@@ -1,0 +1,29 @@
+<div class="container mt-2">
+    <div class="row">
+      <div *ngFor="let item of wishlistData" class="col-md-4 mb-4">
+        <div class="card bg-{{currentMode}} h-100" style="width: 22rem;">
+          <div [style.display]="'flex'" [style.justify-content]="'flex-end'" [style.position]="'absolute'" [style.right]="'0'">
+            <span class="badge rounded-pill bg-{{currentMode}}">{{ item.source.name }}</span>
+          </div>
+          <img src="{{ item.urlToImage ? item.urlToImage : 'https://media.istockphoto.com/id/1311148884/vector/abstract-globe-background.jpg?s=612x612&w=0&k=20&c=9rVQfrUGNtR5Q0ygmuQ9jviVUfrnYHUHcfiwaH5-WFE=' }}" class="card-img-top" height="40%" alt="..." />
+          <div class="card-body d-flex flex-column justify-content-between">
+            <h5 class="card-title">{{ item.title ? item.title : '' }}</h5>
+            <p class="card-text">{{ item.description ? item.description : '' }}...</p>
+            <a href="{{ item.url }}" target="_blank" class="btn btn-primary custom-read-more-btn mt-auto">Read More  <i class="fas fa-link"></i></a>
+            <button class="btn btn-secondary mt-2" (click)="deleteNews(item.wishlistId)">Remove from Wishlist  <i class="fas fa-trash-alt"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="wishlistData.length === 0" >
+      <!-- Display a message or an icon when the wishlist is empty -->
+      <p class="text-center alert alert-warning col-md-12" role="alert" >Your wishlist is empty!
+      <!-- Using a heart icon to indicate an empty wishlist -->
+      <i class="fas fa-heart fa-5x text-muted text-center alert alert-warning col-md-12 " role="alert"></i>
+  </p>
+  <br> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+  </div>
+
+  
+  
