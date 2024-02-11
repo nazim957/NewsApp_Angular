@@ -12,10 +12,12 @@ export class SignupService {
   constructor(private http: HttpClient) { }
 
   public addUser(user: User): Observable<User> {
-    return this.http.post<User>(`http://localhost:9090/api/v1/register`,user)
+    // return this.http.post<User>(`http://localhost:9090/api/v1/register`,user)
+    return this.http.post<User>(`https://userprofile-bi4j.onrender.com/api/v1/register`,user)
   }
 
   public updatePassword(email:string, forgotData:ForgotPassword): Observable<string> {
-    return this.http.put<string>(`http://localhost:9090/api/v1/forgot/${email}`, forgotData)
+    // return this.http.put<string>(`http://localhost:9090/api/v1/forgot/${email}`, forgotData)
+    return this.http.put<string>(`https://userprofile-bi4j.onrender.com/api/v1/forgot/${email}`, forgotData)
   }
 }

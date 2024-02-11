@@ -13,14 +13,14 @@ export class WishlistService {
   constructor(private http: HttpClient) { }
 
   public addToWishlist(wishlist: Article): Observable<Wishlist> {
-    return this.http.post<Wishlist>('http://localhost:9090/api/v4/addFavNews', wishlist);
+    return this.http.post<Wishlist>('https://wishlistservice-qlsl.onrender.com/api/v4/addFavNews', wishlist);
   }
 
   public getUserWishlist(email: string): Observable<Wishlist[]> {
-    return this.http.get<Wishlist[]>(`http://localhost:9090/api/v4/getFavNewsByUser/${email}`);
+    return this.http.get<Wishlist[]>(`https://wishlistservice-qlsl.onrender.com/api/v4/getFavNewsByUser/${email}`);
   }
 
   public deleteNews(id: number): Observable<string> {
-    return this.http.delete<string>(`http://localhost:9090/api/v4/deleteNews/${id}`);
+    return this.http.delete<string>(`https://wishlistservice-qlsl.onrender.com/api/v4/deleteNews/${id}`);
   }
 }

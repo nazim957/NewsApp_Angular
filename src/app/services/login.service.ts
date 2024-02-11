@@ -13,7 +13,8 @@ export class LoginService {
   
     public generateToken(loginData:Login): Observable<LoginResponse>
     { 
-      return this.http.post<LoginResponse>(`http://localhost:9090/api/v2/login`,loginData)
+      // return this.http.post<LoginResponse>(`http://localhost:9090/api/v2/login`,loginData)
+      return this.http.post<LoginResponse>(`https://authenticationservice-uab7.onrender.com/api/v2/login`,loginData)
   
     }
   

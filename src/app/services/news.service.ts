@@ -62,17 +62,19 @@ export class NewsService {
 
   public fetchNewsHome(keyword:string): Observable<News> {
 
-    return this.http.get<News>(`http://localhost:8083/api/v3/getNews/${keyword}`)
+   // return this.http.get<News>(`http://localhost:8083/api/v3/getNews/${keyword}`)
+   return this.http.get<News>(`https://service-va3w.onrender.com/api/v3/getNews/${keyword}`)
 
   }
 
   public fetchNews(keyword:string, pageNo:number, pageSize:number): Observable<News> {
-     return this.http.get<News>(`http://localhost:8083/api/v3/fetchNews/${keyword}/${pageNo}/${pageSize}`)
-
+    // return this.http.get<News>(`http://localhost:8083/api/v3/fetchNews/${keyword}/${pageNo}/${pageSize}`)
+    return this.http.get<News>(`https://service-va3w.onrender.com/api/v3/fetchNews/${keyword}/${pageNo}/${pageSize}`)
   }
 
   public topHeadlines(pageNo:number, pageSize:number ): Observable<News> {
-     return this.http.get<News>(`http://localhost:8083/api/v3/topHeadlines/${pageNo}/${pageSize}`)
+   //  return this.http.get<News>(`http://localhost:8083/api/v3/topHeadlines/${pageNo}/${pageSize}`)
+   return this.http.get<News>(`https://service-va3w.onrender.com/api/v3/topHeadlines/${pageNo}/${pageSize}`)
   }
   
   public getTemperature(): Observable<WeatherResponse> {
