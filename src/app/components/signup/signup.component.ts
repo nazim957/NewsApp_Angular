@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 export class SignupComponent implements OnInit {
 
   currentMode = 'light';
-
+  termsAccepted: boolean = false;
 
   public user: User = {
     email: '',

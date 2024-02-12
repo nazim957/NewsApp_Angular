@@ -10,85 +10,98 @@
 
                 <form (ngSubmit)="formSubmit()" #registerForm="ngForm">
                  <!-- Email Field -->
-<div class="mb-2">
-  <label for="email" class="form-label">Your Email</label>
-  <div class="input-group">
-      <div class="input-group-prepend">
-          <span class="input-group-text">
-              <i class="fas fa-envelope fa-lg"></i>
-          </span>
-      </div>
-      <input
-          required
-          [(ngModel)]="user.email"
-          name="email"
-          type="email"
-          class="form-control"
-          id="email" 
-          placeholder="Enter Email Address"
-          #email="ngModel"
-          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
-      />
-  </div>
-  <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
-      Email is required or invalid.
-  </mat-error>
-</div>
+                 <div class="mb-2">
+                  <label for="email" class="form-label">Your Email</label>
+                  <div class="input-group">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">
+                              <i class="fas fa-envelope fa-lg"></i>
+                          </span>
+                      </div>
+                      <input
+                          required
+                          [(ngModel)]="user.email"
+                          name="email"
+                          type="email"
+                          class="form-control"
+                          id="email" 
+                          placeholder="Enter Email Address"
+                          #email="ngModel"
+                          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+                      />
+                  </div>
+                  <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
+                      <span *ngIf="email.errors?.['required']">Email is required.</span>
+                      <span *ngIf="email.errors?.['pattern'] && !email.errors?.['required']">Email is invalid. Please write email in correct</span>
+                  </mat-error>
+              </div>
+              
 
 
                   <!-- User Name Field -->
                   <div class="mb-2">
                     <label for="username" class="form-label">User Name</label>
                     <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="fas fa-user fa-lg"></i>
-                        </span>
-                      </div>
-                      <input
-                        [(ngModel)]="user.userName"
-                        type="text"
-                        name="username"
-                        id="username"
-                        class="form-control"
-                        placeholder="Enter User Name"
-                        #username="ngModel"
-                        pattern="[a-zA-Z0-9_@$ ]{4,}"
-                        required
-                      />
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-user fa-lg"></i>
+                            </span>
+                        </div>
+                        <input
+                            [(ngModel)]="user.userName"
+                            type="text"
+                            name="username"
+                            id="username"
+                            class="form-control"
+                            placeholder="Enter User Name"
+                            #username="ngModel"
+                            minlength="4"
+                            maxlength="15"
+                            pattern="[a-zA-Z][a-zA-Z0-9_]*"
+                            required
+                        />
                     </div>
-                    <mat-error
-                    *ngIf="username.invalid && (username.dirty || username.touched)"
-                  >
-                    User Name is required or invalid.
-                  </mat-error>
-                  </div>
+                    
+                    <mat-error *ngIf="username.invalid && (username.dirty || username.touched)">
+                        <span *ngIf="username.errors?.['required']">User Name is required.</span>
+                        <span *ngIf="username.errors?.['minlength']">Username must be at least 4 characters long.</span>
+                        <span *ngIf="username.errors?.['maxlength']">Username cannot be longer than 15 characters.</span>
+                        <span *ngIf="username.errors?.['pattern']">Username must start with a letter and can only contain letters, numbers, and underscores.</span>
+                    </mat-error>
+                </div>
+                
 
                   <!-- Password Field -->
                   <div class="mb-2">
                     <label for="password" name="password" class="form-label">Password</label>
                     <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="fas fa-lock fa-lg"></i>
-                        </span>
-                      </div>
-                      <input
-                required
-                [(ngModel)]="user.password"
-                name="password"
-                type="password"
-                class="form-control"
-                matInput
-                placeholder="Enter Password"
-                #password="ngModel"
-                pattern="^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
-              />
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-lock fa-lg"></i>
+                            </span>
+                        </div>
+                        <input
+                            required
+                            [(ngModel)]="user.password"
+                            name="password"
+                            type="password"
+                            class="form-control"
+                            matInput
+                            placeholder="Enter Password"
+                            minlength="8"
+                            #password="ngModel"
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}"
+                           
+                        />
                     </div>
-                       <mat-error *ngIf="password.invalid && (password.dirty || password.touched)">
-                Password is required.
-              </mat-error>
-                  </div>
+                    
+                    <mat-error *ngIf="password.invalid && (password.dirty || password.touched)">
+                        <span *ngIf="password.errors?.['required']">Password is required.</span>
+                        <span *ngIf="password.errors?.['minlength']">Password must be at least 8 characters long.</span>
+                        <span *ngIf="password.errors?.['pattern']">Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*#?&).</span>
+                    </mat-error>
+                </div>
+                
 
                   <!-- Security Question Field -->
                   <div class="mb-2">
@@ -161,22 +174,24 @@
                   <!-- Terms of Service Checkbox -->
                   <div class="form-check mb-2">
                     <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      name="termsCheckbox"
-                      id="termsCheckbox"
-                      required
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        name="termsCheckbox"
+                        id="termsCheckbox"
+                        required
+                        [(ngModel)]="termsAccepted"
+                        #termsCheckbox="ngModel"
                     />
                     <label class="form-check-label" name="termsCheckbox" for="termsCheckbox">
-                      I agree to all statements in
-                      <a href="#!">Terms of service</a>
+                        I agree to all statements in
+                        <a href="#!">Terms of service</a>
                     </label>
-                  </div>
+                </div>
 
                   <!-- Register Button -->
-                  <div class="">
-                    <button type="submit"  [disabled]="registerForm.invalid" class="btn ml-5 mr-2 btn-primary btn-md">
+                  <div  class="">
+                    <button type="submit" [disabled]="!termsAccepted || registerForm.invalid" class="btn ml-5 mr-2 btn-primary btn-md">
                       Register
                     </button>
                     <button type="reset"  class="btn btn-danger ml-4 btn-md">
